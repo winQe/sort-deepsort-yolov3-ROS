@@ -1,5 +1,5 @@
 #Camera topic here
-camera_topic: "/usb_cam/image_raw"
+camera_topic: "/mynteye/left/image_color"
 queue_size: 1
 
 # Set your detection topic here

@@ -1,0 +1,6 @@
+devel_space: /home/adin/catkin_ws/src/sort-deepsort-yolov3-ROS/sort_track/devel
+install: false
+install_space: /home/adin/catkin_ws/src/sort-deepsort-yolov3-ROS/sort_track/install
+profile: default
+source_space: /home/adin/catkin_ws/src/sort-deepsort-yolov3-ROS/sort_track/src
+workspace: /home/adin/catkin_ws/src/sort-deepsort-yolov3-ROS/sort_track

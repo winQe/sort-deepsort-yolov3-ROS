@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # vim: expandtab:ts=4:sw=4
 import os
 import errno

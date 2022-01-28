@@ -55,22 +55,22 @@ def callback_image(data):
 	scores_new = np.array([d.confidence for d in detections_new])
 	indices = prep.non_max_suppression(boxes, 1.0 , scores_new)
 	detections_new = [detections_new[i] for i in indices]
-        # Call the tracker
-        tracker.predict()
-        tracker.update(detections_new)
+	# Call the tracker
+	tracker.predict()
+	tracker.update(detections_new)
 	#Detecting bounding boxes
 	for det in detections_new:
 		bbox = det.to_tlbr()
 		cv2.rectangle(cv_rgb,(int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])),(100,255,50), 1)
 		cv2.putText(cv_rgb , "person", (int(bbox[0]), int(bbox[1])), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (100,255,50), lineType=cv2.LINE_AA)
 	#Tracker bounding boxes
-        for track in tracker.tracks:
+	for track in tracker.tracks:
 		if not track.is_confirmed() or track.time_since_update > 1:
-                	continue
-        	bbox = track.to_tlbr()
+			continue
+		bbox = track.to_tlbr()
 		msg.data = [int(bbox[0]), int(bbox[1]), int(bbox[2]), int(bbox[3]), track.track_id]
-        	cv2.rectangle(cv_rgb, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])),(255,255,255), 1)
-            	cv2.putText(cv_rgb, str(track.track_id),(int(bbox[2]), int(bbox[1])),0, 5e-3 * 200, (255,255,255),1)
+		cv2.rectangle(cv_rgb, (int(bbox[0]), int(bbox[1])), (int(bbox[2]), int(bbox[3])),(255,255,255), 1)
+		cv2.putText(cv_rgb, str(track.track_id),(int(bbox[2]), int(bbox[1])),0, 5e-3 * 200, (255,255,255),1)
 	cv2.imshow("YOLO+SORT", cv_rgb)
 	cv2.waitKey(3)
 		
@@ -84,7 +84,7 @@ def main():
 	nn_budget = 100
 	metric = nn_matching.NearestNeighborDistanceMetric("cosine", max_cosine_distance, nn_budget)
 	tracker = Tracker(metric)
-	model_filename = "/home/ilyas/darknetros_sort/src/sort_track/src/deep_sort/model_data/mars-small128.pb" #Change it to your directory
+	model_filename = "/home/adin/catkin_ws/src/sort_track/src/deep_sort/model_data/mars-small128.pb" #Change it to your directory
 	encoder = gdet.create_box_encoder(model_filename)
 	#Initialize ROS node
 	rospy.init_node('sort_tracker', anonymous=True)
